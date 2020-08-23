@@ -203,7 +203,7 @@ API_AVAILABLE(ios(11.0)){
 }
 
 - (void)fooBlock:(BarBlock)block {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
         if (block) {
             NSObject *result = block(@"123123");
             DDLogInfo(@"%s result: %@", __FUNCTION__, result);
