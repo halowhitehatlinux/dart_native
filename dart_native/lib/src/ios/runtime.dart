@@ -1,3 +1,4 @@
+export 'runtime/id.dart';
 export 'runtime/selector.dart';
 export 'runtime/class.dart';
 export 'runtime/protocol.dart';
