@@ -6,3 +6,4 @@ export 'runtime/nsobject.dart';
 export 'runtime/functions.dart';
 export 'runtime/nsobject_protocol.dart';
 export 'runtime/nsobject_ref.dart';
+export 'runtime/message.dart';
