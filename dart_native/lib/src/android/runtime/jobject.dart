@@ -10,12 +10,12 @@ class JObject extends Class{
   Pointer _ptr;
 
   //init target class
-  JObject(String className, Pointer ptr) : super(className) {
-    _ptr = ptr == null ? nativeCreateClass(super.classUtf8()) : ptr;
+  JObject(String className, [Pointer ptr]) : super(className) {
+    _ptr = ptr == null ? nativeCreateClass(classUtf8()) : ptr;
     JObjectPool.sInstance.retain(this);
   }
 
-  Pointer get pointer{
+  Pointer get pointer {
     return _ptr;
   }
 

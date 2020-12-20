@@ -4,7 +4,7 @@ import 'package:dart_native/dart_native.dart';
 import 'package:dart_native_example/android/entity.dart';
 
 class RuntimeStub extends JObject {
-  RuntimeStub([Pointer ptr]) : super("com/dartnative/dart_native_example/RuntimeStub", ptr);
+  RuntimeStub() : super("com/dartnative/dart_native_example/RuntimeStub");
 
   int getInt(int i) {
     return invoke('getInt', [i], "I");

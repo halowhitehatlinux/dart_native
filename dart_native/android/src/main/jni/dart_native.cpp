@@ -32,7 +32,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
     gJvm = pjvm;  // cache the JavaVM pointer
     auto env = getEnv();
     //replace with one of your classes in the line below
-    auto randomClass = env->FindClass("com/dartnative/dart_native/DartNative");
+    auto randomClass = env->FindClass("com/dartnative/dart_native/DartNativePlugin");
     jclass classClass = env->GetObjectClass(randomClass);
     auto classLoaderClass = env->FindClass("java/lang/ClassLoader");
     auto getClassLoaderMethod = env->GetMethodID(classClass, "getClassLoader",
@@ -99,16 +99,6 @@ void releaseTargetClass(void *classPtr) {
     if (bShouldDetach) {
         gJvm->DetachCurrentThread();
     }
-}
-
-char *findReturnType(JNIEnv *curEnv, jclass cls, jobject object, char* methondName, char **argType) {
-    jclass nativeClass = curEnv->FindClass("com/dartnative/dart_native/DartNative");
-    jmethodID nativeMethodID = curEnv->GetStaticMethodID(nativeClass,
-            "getMethodReturnType", "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;");
-
-//    jobjectArray stringArray = new jobjectArray()
-
-//    curEnv->CallStaticObjectMethodA(nativeClass, nativeMethodID, argType);
 }
 
 char *spliceChar(char *dest, char *src) {

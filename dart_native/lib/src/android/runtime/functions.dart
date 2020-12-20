@@ -8,16 +8,16 @@ import 'package:ffi/ffi.dart';
 /// input : className
 /// return : classObject
 final Pointer<Void> Function(Pointer<Utf8>) nativeCreateClass = nativeDylib
-    .lookup<NativeFunction<Pointer<Void> Function(Pointer<Utf8>)>>(
+    ?.lookup<NativeFunction<Pointer<Void> Function(Pointer<Utf8>)>>(
         "createTargetClass")
-    .asFunction();
+    ?.asFunction();
 
 /// release class
 /// objectPtr: 对象指针
 final void Function(Pointer<Void> objectPtr) nativeReleaseClass = nativeDylib
-    .lookup<NativeFunction<Void Function(Pointer<Void> objectPtr)>>(
+    ?.lookup<NativeFunction<Void Function(Pointer<Void> objectPtr)>>(
     "releaseTargetClass")
-    .asFunction();
+    ?.asFunction();
 
 /// 调用native方法
 ///
@@ -32,7 +32,7 @@ final void Function(Pointer<Void> objectPtr) nativeReleaseClass = nativeDylib
 final Pointer<Void> Function(Pointer<Void> objectPtr, Pointer<Utf8> methodName,
     Pointer<Pointer<Void>> argsPtrs, Pointer<Pointer<Utf8>> typePtrs, Pointer<Utf8> returnType)
 nativeInvokeNeo = nativeDylib
-    .lookup<
+    ?.lookup<
     NativeFunction<
         Pointer<Void> Function(
             Pointer<Void> objectPtr,
@@ -40,4 +40,4 @@ nativeInvokeNeo = nativeDylib
             Pointer<Pointer<Void>> argsPtrs,
             Pointer<Pointer<Utf8>> typePtrs,
             Pointer<Utf8> returnType)>>("invokeNativeMethodNeo")
-    .asFunction();
+    ?.asFunction();
