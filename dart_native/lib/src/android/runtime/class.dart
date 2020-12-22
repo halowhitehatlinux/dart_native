@@ -1,26 +1,25 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
-
 class Class extends Comparable<dynamic>{
   String _className;
+  Pointer _pointer;
 
-  Class(String className) {
+  Class(String className, Pointer pointer) {
     _className = className;
+    _pointer = pointer;
   }
 
   String get className {
     return _className;
   }
 
-  Pointer<Utf8> classUtf8() {
-    print("HUIZZ className $_className");
-    return Utf8.toUtf8(_className);
+  Pointer get pointer {
+    return _pointer;
   }
 
   @override
   int compareTo(other) {
-    if (other is Class && other._className == _className) {
+    if (other is Class && other._className == _className && other.pointer == _pointer) {
       return 0;
     }
     return 1;

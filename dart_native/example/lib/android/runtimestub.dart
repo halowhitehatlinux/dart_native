@@ -15,11 +15,11 @@ abstract class SampleDelegate {
   callbackFloat(double f);
   callbackString(String s);
   callbackDouble(double d);
-  callbackComplex(int i, double d, String s);
+  bool callbackComplex(int i, double d, String s);
 }
 
 class RuntimeStub extends JObject {
-  RuntimeStub() : super("com/dartnative/dart_native_example/RuntimeStub");
+  RuntimeStub([Pointer ptr]) : super("com/dartnative/dart_native_example/RuntimeStub", ptr);
 
   int getInt(int i) {
     return invoke('getInt', [i], "I");
@@ -70,7 +70,7 @@ class RuntimeStub extends JObject {
   }
 
   Entity createEntity() {
-    return new Entity(invoke('createEntity', [], "Lcom/dartnative/dart_native_example/Entity;"));
+    return Entity(invoke('createEntity', [], "Lcom/dartnative/dart_native_example/Entity;"));
   }
 
   int getTime(Entity entity) {
@@ -79,5 +79,9 @@ class RuntimeStub extends JObject {
 
   void setDelegateListener(SampleDelegate delegate) {
     invoke('setDelegateListener', [delegate], "V");
+  }
+
+  List getList() {
+    return invoke("getList", [], "Ljava/util/List;");
   }
 }

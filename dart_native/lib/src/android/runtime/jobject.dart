@@ -15,19 +15,14 @@ void passJObjectToNative(JObject obj) {
 }
 
 class JObject extends Class {
-  Pointer _ptr;
 
   //init target class
-  JObject(String className, [Pointer ptr]) : super(className) {
-    _ptr = ptr == null ? nativeCreateClass(super.classUtf8()) : ptr;
+  JObject(String className, Pointer ptr)
+      : super(className, ptr == null ? nativeCreateClass(classUtf8(className)) : ptr) {
     passJObjectToNative(this);
   }
 
-  Pointer get pointer {
-    return _ptr;
-  }
-
-  dynamic invoke(String methodName, List args, [String returnType]) {
+  dynamic invoke(String methodName, List args, String returnType) {
     Pointer<Utf8> methodNamePtr = Utf8.toUtf8(methodName);
     Pointer<Utf8> returnTypePtr = Utf8.toUtf8(returnType);
 
@@ -48,7 +43,7 @@ class JObject extends Class {
       typePointers.elementAt(args.length).value = nullptr;
     }
     Pointer<Void> invokeMethodRet = nativeInvokeNeo(
-        _ptr, methodNamePtr, pointers, typePointers, returnTypePtr);
+        pointer, methodNamePtr, pointers, typePointers, returnTypePtr);
     dynamic result = loadValueFromPointer(invokeMethodRet, returnType);
     if (pointers != null) {
       free(pointers);
@@ -59,11 +54,7 @@ class JObject extends Class {
     return result;
   }
 
-  @override
-  int compareTo(other) {
-    if (other is JObject && other._ptr == _ptr) {
-      return 0;
-    }
-    return 1;
+  static Pointer<Utf8> classUtf8(String className) {
+    return Utf8.toUtf8(className);
   }
 }

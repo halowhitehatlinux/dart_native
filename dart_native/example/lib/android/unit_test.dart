@@ -77,6 +77,9 @@ testAndroid(RuntimeStub stub) {
   print('new entity get time : ${stub.getTime(new Entity())}');
 
   stub.setDelegateListener(DelegateStub());
+
+  // List nativeList = stub.getList();
+  // print("List from native ${nativeList.toString()}");
 }
 
 int currentTimeMillis() {
